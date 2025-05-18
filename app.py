@@ -68,4 +68,4 @@ def reset_spiel():
     return redirect(url_for('rate_code'))
 
 if __name__ == '__main__':
-    app.run(debug=True
+    app.run(debug=True)
