@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vierstelliger Code Knacker</title>
+</head>
+<body>
+    <h1>Rate den vierstelligen Code!</h1>
+    <p>Gib einen vierstelligen Code aus den Ziffern 0-9 ein.</p>
+
+    <form method="POST">
+        <input type="text" name="code" maxlength="4" size="4" pattern="[0-9]{4}" required>
+        <input type="submit" value="Versuchen">
+    </form>
+
+    <h2>Spezial-Code eingeben (z.B. 'rolex' für dauerhaften Tipp zur letzten Ziffer):</h2>
+    <form method="POST">
+        <input type="text" name="spezialcode">
+        <input type="submit" value="Hinweis aktivieren">
+    </form>
+
+    {% if hinweis %}
+        <p><strong>Hinweis zur letzten Ziffer:</strong> {{ hinweis }}</p>
+    {% endif %}
+
+    {% if versuche %}
+        <h2>Deine bisherigen Versuche:</h2>
+        <ul>
+            {% for versuch in versuche %}
+                <li>{{ versuch.code }} - Ergebnis: {{ versuch.ergebnis }}</li>
+            {% endfor %}
+        </ul>
+        <p>Anzahl der Versuche: {{ anzahl_versuche }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('reset_spiel') }}">
+        <input type="submit" value="Neues Spiel / Reset">
+    </form>
+</body>
+</html>
